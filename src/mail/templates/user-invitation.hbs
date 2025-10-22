@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6; 
+      color: #2d3748; 
+      background-color: #f7fafc;
+      margin: 0;
+      padding: 20px;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .email-header {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      padding: 40px 30px;
+      text-align: center;
+    }
+    .email-logo {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .email-title {
+      font-size: 24px;
+      margin: 0;
+      font-weight: 600;
+    }
+    .email-body {
+      padding: 40px 30px;
+    }
+    .welcome-text {
+      font-size: 18px;
+      margin-bottom: 25px;
+      color: #4a5568;
+    }
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      padding: 16px 40px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      margin: 25px 0;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .cta-button:hover {
+      transform: translateY(-2px);
+    }
+    .link-backup {
+      background: #f1f5f9;
+      padding: 15px;
+      border-radius: 6px;
+      word-break: break-all;
+      font-size: 14px;
+      color: #475569;
+      margin: 20px 0;
+    }
+    .expiry-notice {
+      background: #fff7ed;
+      border-left: 4px solid #f59e0b;
+      padding: 15px;
+      margin: 25px 0;
+      border-radius: 4px;
+    }
+    .email-footer {
+      background: #f8fafc;
+      padding: 25px 30px;
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+      border-top: 1px solid #e2e8f0;
+    }
+    .security-notice {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="email-header">
+      <div class="email-logo">{{appName}}</div>
+      <h1 class="email-title">¡Te damos la bienvenida!</h1>
+    </div>
+    
+    <div class="email-body">
+      <p class="welcome-text">
+        Estás a un paso de unirte a <strong>{{appName}}</strong>. 
+        Has sido invitado a formar parte de nuestra comunidad.
+      </p>
+      
+      <p>Para comenzar, necesitas activar tu cuenta y establecer tu contraseña:</p>
+      
+      <div style="text-align: center;">
+        <a href="{{url}}" class="cta-button">Activar Mi Cuenta</a>
+      </div>
+      
+      <p style="text-align: center; color: #64748b; margin-bottom: 10px;">
+        Si el botón no funciona, copia y pega este enlace:
+      </p>
+      
+      <div class="link-backup">
+        {{url}}
+      </div>
+      
+      <div class="expiry-notice">
+        <strong>⚠️ Importante:</strong> Este enlace de activación expirará en 48 horas 
+        por razones de seguridad.
+      </div>
+      
+      <p>Una vez que actives tu cuenta, podrás acceder a todas las funciones 
+      de nuestra plataforma.</p>
+    </div>
+    
+    <div class="email-footer">
+      <p>Si no reconoces esta invitación, por favor ignora este mensaje.</p>
+      <p>© 2024 {{appName}}. Todos los derechos reservados.</p>
+      <p class="security-notice">
+        Este es un mensaje automático, por favor no respondas a este correo.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

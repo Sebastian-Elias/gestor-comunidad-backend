@@ -1,0 +1,183 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int                  @id @default(autoincrement())
+  email               String               @unique
+  password            String?
+  role                Role                 @default(MIEMBRO)
+  createdAt           DateTime             @default(now())
+  memberId            Int?                 @unique
+  firstName           String               @default("")
+  lastName            String               @default("")
+  resources           Resource[]
+  member              Member?              @relation(fields: [memberId], references: [id])
+  invitationTokens    InvitationToken[]
+
+  // Relaciones inversas
+  createdFinanceEntries FinanceEntry[] @relation("FinanceCreatedBy")
+  updatedFinanceEntries FinanceEntry[] @relation("FinanceUpdatedBy")
+  blogs                 Blog[]         @relation("UserBlogs")
+  events                Event[]        @relation("UserEvents")
+
+  @@map("users")
+}
+
+model Member {
+  id                Int       @id @default(autoincrement())
+  firstName         String
+  lastName          String
+  rut               String?   @unique
+  phone             String?
+  address           String?
+  incorporationDate DateTime?
+  baptismDate       DateTime?
+  photoUrl          String?
+  createdAt         DateTime  @default(now())
+  birthDate         DateTime?
+  email             String?
+  passport          String?   @unique
+  isMale            Boolean?
+  isActive          Boolean   @default(true)
+  user              User?
+
+  @@map("members")
+}
+
+model FinanceCategory {
+  id      Int            @id @default(autoincrement())
+  name    String         @unique
+  entries FinanceEntry[]
+}
+
+enum FinanceType {
+  INCOME
+  EXPENSE
+}
+
+enum PaymentMethod {
+  CASH
+  TRANSFER
+  CHECK
+  CARD
+  OTHER
+}
+
+enum Currency {
+  CLP
+  USD
+  EUR
+}
+
+model FinanceEntry {
+  id              Int           @id @default(autoincrement())
+  type            FinanceType
+  amount          Float
+  currency        Currency      @default(CLP)
+  date            DateTime
+  description     String
+  paymentMethod   PaymentMethod
+  referenceNumber String?
+  donorName       String?
+  donorContact    String?
+  beneficiary     String?
+  accountNumber   String?
+  bankName        String?
+  invoiceNumber   String?
+  subItem         String?
+  comments        String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relación con categorías
+  categoryId Int
+  category   FinanceCategory @relation(fields: [categoryId], references: [id])
+
+  // Relaciones con usuarios
+  createdBy   User? @relation("FinanceCreatedBy", fields: [createdById], references: [id])
+  createdById Int?
+  updatedBy   User? @relation("FinanceUpdatedBy", fields: [updatedById], references: [id])
+  updatedById Int?
+
+  @@index([date])
+  @@index([type])
+  @@index([categoryId])
+  @@index([type, date])
+  @@map("finance_entries")
+}
+
+model Resource {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String?
+  fileUrl      String
+  uploadedAt   DateTime @default(now())
+  uploadedById Int
+  uploadedBy   User     @relation(fields: [uploadedById], references: [id])
+
+  @@map("resources")
+}
+
+enum Role {
+  ADMIN
+  LIDER
+  MIEMBRO
+  PASTOR
+  PASTORA
+  FINANZAS
+  MULTIMEDIA
+}
+
+model Blog {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  content     String?
+  excerpt     String?
+  featured    Boolean   @default(false)
+  imageUrl    String?
+  publishedAt DateTime?
+  authorId    Int
+  author      User      @relation("UserBlogs", fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("blogs")
+}
+
+model Event {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  description String?
+  date        DateTime?
+  location    String?
+  featured    Boolean   @default(false)
+  imageUrl    String?
+  organizerId Int
+  organizer   User      @relation("UserEvents", fields: [organizerId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("events")
+}
+
+model InvitationToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("invitation_tokens")
+}
+
