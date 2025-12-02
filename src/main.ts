@@ -20,14 +20,20 @@ async function bootstrap() {
   });
 
     //Configuración de Cors
-  app.enableCors({
+  /*app.enableCors({
     origin: ['http://localhost:5173', 'http://localhost:3001'],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
     preflightContinue: false, // Importante para manejar OPTIONS correctamente
     optionsSuccessStatus: 204
-  });
+  });*/
+
+  app.enableCors({
+  origin: true,
+  credentials: true,
+});
+
 
   // ⚠️ Servir archivos estáticos desde /uploads (SE COMENTA YA QUE SE IMPLEMENTÓ https://console.cloudinary.com/)
  // Esto hace que los archivos sean accesibles públicamente desde /uploads
@@ -67,7 +73,6 @@ async function bootstrap() {
       },
       'JWT-auth', // Este nombre debe coincidir con el usado en @ApiBearerAuth('JWT-auth')
     )
-    .addServer(`http://localhost:${process.env.PORT ?? 3000}`, 'Servidor local')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
