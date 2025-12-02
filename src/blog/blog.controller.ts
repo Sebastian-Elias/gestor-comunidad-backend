@@ -19,7 +19,7 @@ import { Request } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Readable } from 'stream';
 import { JwtGuard } from '../auth/jwt/jwt.guard';
-import cloudinary from 'cloudinary.config';
+import cloudinary from '../../cloudinary.config';
 import { BlogService } from './blog.service';
 import { CreateBlogDto } from './dto/create-blog.dto';
 import { UpdateBlogDto } from './dto/update-blog.dto';

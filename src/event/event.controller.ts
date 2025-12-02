@@ -19,7 +19,7 @@ import { Request } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Readable } from 'stream';
 import { JwtGuard } from '../auth/jwt/jwt.guard';
-import cloudinary from 'cloudinary.config'; // Asegúrate de tener esta configuración
+import cloudinary from '../../cloudinary.config';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';

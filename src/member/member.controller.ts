@@ -13,7 +13,7 @@ import {
   ValidationPipe,
   BadRequestException
 } from '@nestjs/common';
-import cloudinary from 'cloudinary.config';
+import cloudinary from '../../cloudinary.config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Readable } from 'stream';
 import { MemberService } from './member.service';
