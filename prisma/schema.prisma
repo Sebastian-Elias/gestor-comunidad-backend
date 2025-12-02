@@ -181,3 +181,12 @@ model InvitationToken {
   @@map("invitation_tokens")
 }
 
+model Meeting {
+  id          Int      @id @default(autoincrement())
+  title       String
+  schedule    String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+

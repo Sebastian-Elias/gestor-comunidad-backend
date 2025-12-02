@@ -20,7 +20,7 @@
 Sistema de gestión integral para iglesias cristianas.  
 Desarrollado con **NestJS**, **Prisma** y **PostgreSQL**, ofrece herramientas modernas para la administración de **miembros, finanzas, gestión de blog, eventos, y calendario** eclesiásticas.
 
-[👉 Ver Frontend del Proyecto](https://github.com/tu-usuario/iglesia-platform-frontend)
+[👉 Ver Frontend del Proyecto](https://github.com/Sebastian-Elias/gestor-comunidad-frontend)
 
 ✨ Características Principales
 👥 Gestión de Miembros

@@ -13,6 +13,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { MailModule } from './mail/mail.module';
 import { BlogModule } from './blog/blog.module';
 import { EventModule } from './event/event.module';
+import { MeetingsModule } from './meetings/meetings.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { EventModule } from './event/event.module';
     MailModule,
     BlogModule,
     EventModule,
+    MeetingsModule
   ],
   controllers: [],
   providers: [],

@@ -21,7 +21,7 @@ async function bootstrap() {
 
     //Configuración de Cors
   app.enableCors({
-    origin: 'http://localhost:5173', // Asegúrate que coincida con tu puerto frontend
+    origin: ['http://localhost:5173', 'http://localhost:3001'],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
@@ -48,8 +48,11 @@ async function bootstrap() {
 
   // ✅ Configuración de Swagger
   const config = new DocumentBuilder()
-    .setTitle('API de Miembros')
-    .setDescription('Documentación completa de los endpoints de la API para gestión de miembros')
+    .setTitle('Plataforma de Iglesia - API')
+.setDescription(
+  'Documentación oficial de la API de la Plataforma de Iglesia. Aquí encontrarás todos los endpoints disponibles para la gestión de usuarios, ministerios, eventos, roles, asistencia y demás módulos del sistema.'
+)
+
     .setVersion('1.0')
     .addTag('miembros', 'Operaciones relacionadas con miembros')
     .addTag('users', 'Operaciones relacionadas con usuarios') // Agrega más tags según tus controladores
